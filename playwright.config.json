@@ -1,0 +1,13 @@
+{
+  "timeout": 30000,
+  "use": {
+    "headless": true,
+    "viewport": { "width": 1920, "height": 1080 },
+    "video": "on-first-retry"
+  },
+  "projects": [
+    { "name": "chromium" },
+    { "name": "firefox" },
+    { "name": "webkit" }
+  ]
+}
