@@ -32,21 +32,7 @@ def test_phone_input(page, phone_input_value):
 @pytest.mark.smoke
 @pytest.mark.parametrize('text_input_value', ['Some text, with numbers 123!'])
 def test_textarea_input(page, text_input_value):
-    """
-    Test the functionality of the textarea input field on a webpage.
 
-    This function fills the textarea input field with a specified value and asserts
-    that the input field's value matches the expected value.
-
-    Parameters:
-    page : Page
-        The Playwright page object representing the browser page.
-    text_input_value : str
-        The value to be filled into the textarea input field.
-
-    Returns:
-    None
-    """
     textarea_input = page.locator('#textarea')
     textarea_input.fill(text_input_value)
     assert textarea_input.input_value() == 'Some text, with numbers 123!', f'Actual value is not equal to {textarea_input}'

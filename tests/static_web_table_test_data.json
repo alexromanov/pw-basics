@@ -1,0 +1,40 @@
+{
+    "Selenium": {
+        "Amit": {
+            "Learn Selenium": {
+                "Price": "300"
+            }
+        },
+        "Mukesh": {
+            "Master In Selenium": {
+                "Price": "3000"
+            }
+        }
+    },
+    "Java": {
+        "Mukesh": {
+            "Learn Java": {
+                "Price": "500"
+            }
+        }
+    },
+    "Javascript": {
+        "Animesh": {
+            "Learn JS": {
+                "Price": "300"
+            }
+        },
+        "Amit": {
+            "Master In JS": {
+                "Price": "1000"
+            }
+        }
+    },
+    "JAVA": {
+        "Amod": {
+            "Master In Java": {
+                "Price": "2000"
+            }
+        }
+    }
+}

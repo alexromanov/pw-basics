@@ -21,7 +21,7 @@ def collect_test_run_month_day_year_data(page):
         for month_index, month in enumerate(months):
             page.locator('.ui-datepicker-month').select_option(str(month_index))
             dates = page.locator('.ui-datepicker-calendar td[data-handler="selectDay"] a').all_inner_texts()
-            # actual_dates = []
+
             for day in dates:
                 formatted_date = f"{str(month_index + 1).zfill(2)}/{day.zfill(2)}/{year}"
                 # actual_dates.append(formatted_date)
