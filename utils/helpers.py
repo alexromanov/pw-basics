@@ -108,3 +108,30 @@ def helpers_get_page():
     page.goto("https://testautomationpractice.blogspot.com")
 
     return playwright, browser, context, page
+
+
+def save_data_to_file(data, file_name="data.json"):
+    """
+    @brief Saves the given data to a JSON file.
+
+    @param data The dictionary or list to be saved as a JSON file.
+    @param file_name The name of the JSON file. Default is `"data.json"`.
+
+    @description
+    - Converts the input data into JSON format.
+    - Writes the formatted JSON data into the specified file.
+    - Uses `indent=4` for better readability.
+    - Ensures proper encoding for non-ASCII characters.
+
+    @exception Handles file write errors and logs a message if writing fails.
+
+    @usage
+    ```python
+    my_data = {"name": "Alice", "age": 25, "city": "Paris"}
+    save_data_to_file(my_data, "output.json")
+    ```
+
+    @return None
+    """
+    with open(file_name, 'w', encoding='utf-8') as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)

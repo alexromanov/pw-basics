@@ -1,5 +1,3 @@
-from pprint import pprint
-
 import pytest
 import utils.helpers as helpers_functions
 import logging
@@ -9,7 +7,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 @pytest.mark.smoke
-def test_static_web_table(page, web_table_test_data):
+def test_static_web_table(page, read_file):
     """
     @brief Verifies that the static web table contains the expected book data.
 
@@ -28,8 +26,11 @@ def test_static_web_table(page, web_table_test_data):
     @assert There should be no missing rows in the table.
     @assert There should be no unexpected extra rows in the table.
     """
+
+    static_web_table_test_data = read_file('static_web_table_test_data.json')
+
     expected_rows_data_list = []
-    for subject, value_dict in web_table_test_data.items():
+    for subject, value_dict in static_web_table_test_data.items():
         for author, author_dict in value_dict.items():
             for book_name, book_name_dict in author_dict.items():
                 price = str(book_name_dict.get("Price"))

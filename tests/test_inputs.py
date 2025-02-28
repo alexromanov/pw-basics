@@ -32,7 +32,6 @@ def test_phone_input(page, phone_input_value):
 @pytest.mark.smoke
 @pytest.mark.parametrize('text_input_value', ['Some text, with numbers 123!'])
 def test_textarea_input(page, text_input_value):
-
     textarea_input = page.locator('#textarea')
     textarea_input.fill(text_input_value)
     assert textarea_input.input_value() == 'Some text, with numbers 123!', f'Actual value is not equal to {textarea_input}'

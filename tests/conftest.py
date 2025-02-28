@@ -1,11 +1,28 @@
 import json
+import sys
 import pytest
 import os
 import pytest
 from playwright.sync_api import sync_playwright
 import utils.helpers as helpers_functions
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.append(PROJECT_ROOT)
+
 URL = os.getenv("BASE_URL", "https://testautomationpractice.blogspot.com")
+
+
+def pytest_addoption(parser):
+    """
+    Adds a CLI argument '--browser-visible' for controlling browser mode.
+    """
+    parser.addoption(
+        '--browser-visible',
+        action='store_true',
+        default=False,
+        help="Run tests with the browser UI (headed mode). Default is headless mode."
+    )
 
 
 @pytest.fixture(scope="session")
@@ -15,10 +32,26 @@ def playwright_instance():
 
 
 @pytest.fixture(scope="session")
-def browser(playwright_instance):
-    # Do not remove this line, it's for debugging
-    # browser = playwright_instance.chromium.launch(headless=False)
-    browser = playwright_instance.chromium.launch(headless=True)
+def browser(playwright_instance, request):
+    """
+    Provides a Playwright browser instance with dynamic headless control.
+    @usage
+    ```
+    Run in headed mode (browser UI visible):
+    pytest --browser-visible
+    pytest 'tests/test_inputs.py::test_textarea_input[Some text, with numbers 123!]' --browser-visible
+    Run in headless mode (default):
+    pytest
+    pytest 'tests/test_inputs.py::test_textarea_input[Some text, with numbers 123!]'
+    ```
+    If running via PyCharm Run Button, it checks the `BROWSER_VISIBLE` environment variable.
+    """
+
+    cli_headed = request.config.getoption("--browser-visible")
+    env_headed = os.getenv("BROWSER_VISIBLE", "false").lower() == 'true'
+    headless_mode = not (cli_headed or env_headed)
+
+    browser = playwright_instance.chromium.launch(headless=headless_mode)
     yield browser
     browser.close()
 
@@ -49,9 +82,12 @@ def page(browser):
 @pytest.fixture(scope='module')
 def read_file():
     """Reads and returns JSON data from a specified file."""
+
     def load_data(file_name):
-        with open(file_name, 'r') as file:
+        abs_path = os.path.abspath(file_name)  # Convert to absolute path
+        with open(abs_path, 'r') as file:
             return json.load(file)
+
     return load_data
 
 
