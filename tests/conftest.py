@@ -79,13 +79,28 @@ def page(browser):
     context.close()
 
 
+# @pytest.fixture(scope='module')
+# def read_file():
+#     """Reads and returns JSON data from a specified file."""
+#
+#     def load_data(file_name):
+#         abs_path = os.path.abspath(file_name)  # Convert to absolute path
+#         with open(abs_path, 'r') as file:
+#             return json.load(file)
+#
+#     return load_data
 @pytest.fixture(scope='module')
 def read_file():
-    """Reads and returns JSON data from a specified file."""
+    """Reads and returns JSON data from a specified file in the tests/data/ directory."""
 
     def load_data(file_name):
-        abs_path = os.path.abspath(file_name)  # Convert to absolute path
-        with open(abs_path, 'r') as file:
+        data_dir = os.path.join(os.path.dirname(__file__), 'valid_data')
+        abs_path = os.path.join(data_dir, file_name)
+
+        if not os.path.exists(abs_path):
+            raise FileNotFoundError(f"❌ Test data file not found: {abs_path}")
+
+        with open(abs_path, 'r', encoding="utf-8") as file:
             return json.load(file)
 
     return load_data

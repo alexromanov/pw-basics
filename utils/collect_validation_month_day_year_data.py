@@ -39,7 +39,7 @@ def collect_validation_month_day_year_data(page):
     return all_dates_dict
 
 
-def save_data_to_file(data, file_name='validation_month_day_year_data.json'):
+def save_data_to_file(data, file_name='year_month_full_dates_validation_data.json'):
     """
     @brief Saves collected date validation data into a JSON file.
 
@@ -56,7 +56,7 @@ def main():
 
     Steps:
     1. Launch a headless browser using Playwright.
-    2. Open a new browser context and page.
+    2. Open a select_mont_day_year_validation_data.json browser context and page.
     3. Navigate to the test automation practice website.
     4. Extract available dates from the date picker.
     5. Save the extracted data into a JSON file.

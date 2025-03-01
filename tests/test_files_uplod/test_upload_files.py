@@ -11,17 +11,13 @@ logging.basicConfig(level=logging.DEBUG)
 @pytest.mark.smoke
 def test_upload_single_file(page, file_path):
     """
-    @brief Verifies the functionality of uploading a single file in a file input field.
-    @param page The Playwright page instance.
-    @test
     1. Define the file path to be uploaded.
     2. Locate the file input field.
     3. Upload the file using `set_input_files()`.
     4. Retrieve the actual file name from the input field.
     5. Compare the uploaded file name with the expected file name.
-
-    @assert The uploaded file name should match the expected file name.
     """
+
     file_input = page.locator('input#singleFileInput')
     file_input.set_input_files(file_path)
 
@@ -34,11 +30,6 @@ def test_upload_single_file(page, file_path):
 @pytest.mark.smoke
 def test_upload_multiple_files(page, file_path):
     """
-    @brief Verifies that multiple files can be uploaded successfully and appear in the file status.
-    @param page The Playwright page instance.
-    @param file_path The absolute path of the file to be uploaded.
-
-    @test
     1. Locate the multiple file input field.
     2. Set multiple files (two copies of the same file) for upload.
     3. Retrieve the names of the uploaded files.
@@ -46,9 +37,6 @@ def test_upload_multiple_files(page, file_path):
     5. Extract the file status displayed after upload.
     6. Verify that both uploaded files are correctly listed in the file status.
     7. Validate that the actual uploaded file names match the expected file name.
-
-    @assert The uploaded files should be listed in the file status.
-    @assert The file names should match the expected uploaded file name.
     """
 
     file_input = page.locator('input#multipleFilesInput')

@@ -1,6 +1,5 @@
 import time
 from datetime import datetime
-
 import pytest
 import logging
 from playwright.sync_api import expect

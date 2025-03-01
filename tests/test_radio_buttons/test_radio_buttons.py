@@ -15,11 +15,33 @@ logging.basicConfig(level=logging.DEBUG)
                                              '#thursday',
                                              '#friday',
                                              '#saturday'])
-def test_radio_buttons(page, radio_button_id):
+def test_days_radio_buttons(page, radio_button_id):
+    """
+    1. Locate the radio button using its ID.
+    2. Click the radio button to select it.
+    3. Verify that the clicked radio button is checked.
+
+    @assert The radio button should be checked after clicking.
+    """
+
     radio_button = page.locator(radio_button_id)
     radio_button.click()
+
     expect(radio_button).to_be_checked()
 
 
+@pytest.mark.smoke
+@pytest.mark.parametrize('radio_button_id', ['#male', '#female'])
+def test_gender_radio_button(page, radio_button_id):
+    """
+    1. Locate the radio button element using its ID.
+    2. Click the radio button to select it.
+    3. Verify that the selected radio button is checked.
 
+    @assert The radio button should be checked after being clicked.
+    """
 
+    radio_button = page.locator(radio_button_id)
+    radio_button.click()
+
+    expect(radio_button).to_be_checked()

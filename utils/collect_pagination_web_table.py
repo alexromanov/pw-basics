@@ -59,7 +59,7 @@ def get_all_pages_data_dict(page):
 def main():
     playwright, browser, context, page = helpers_functions.helpers_get_page()
     all_pages_data_dict = get_all_pages_data_dict(page)
-    helpers_functions.save_data_to_file(all_pages_data_dict, '../tests/pagination_pages_data_dict.json')
+    helpers_functions.save_data_to_file(all_pages_data_dict, '../tests/test_tables/pagination_pages_data_dict.json')
     browser.close()
     playwright.stop()
 

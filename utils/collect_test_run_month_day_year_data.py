@@ -31,7 +31,7 @@ def collect_test_run_month_day_year_data(page):
     return all_dates_dict
 
 
-def save_data_to_file(data, file_name='test_run_month_day_year_data.json'):
+def save_data_to_file(data, file_name='year_month_days_validation_data.json'):
     with open(file_name, 'w') as file:
         json.dump(data, file, indent=4)
 
