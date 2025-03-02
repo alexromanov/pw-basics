@@ -24,7 +24,7 @@ def collect_data(page):
     return books_data_dict
 
 
-def save_data_to_file(data, file_name='static_web_table_test_data.json'):
+def save_data_to_file(data, file_name='static_web_table_validation_data.json'):
     with open(file_name, 'w') as file:
         json.dump(data, file, indent=4)
 

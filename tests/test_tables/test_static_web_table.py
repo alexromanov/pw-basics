@@ -9,25 +9,15 @@ logging.basicConfig(level=logging.DEBUG)
 @pytest.mark.smoke
 def test_static_web_table(page, read_file):
     """
-    @brief Verifies that the static web table contains the expected book data.
-
-    @param page The Playwright page instance.
-    @param web_table_test_data The expected book data stored in a structured dictionary format.
-
-    @test
     1. Extract the expected table data from the test dataset (`web_table_test_data`).
     2. Locate the table element using its `name` attribute.
     3. Retrieve all table rows, excluding the header.
     4. Extract actual data from the table by iterating through rows and collecting cell values.
     5. Compare the extracted table data (`actual_rows_data_list`) with expected data (`expected_rows_data_list`).
     6. Identify any missing or unexpected rows in the table.
-
-    @assert The actual table rows should match the expected rows.
-    @assert There should be no missing rows in the table.
-    @assert There should be no unexpected extra rows in the table.
     """
 
-    static_web_table_test_data = read_file('static_web_table_test_data.json')
+    static_web_table_test_data = read_file('static_web_table_validation_data.json')
 
     expected_rows_data_list = []
     for subject, value_dict in static_web_table_test_data.items():
