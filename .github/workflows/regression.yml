@@ -29,9 +29,25 @@ jobs:
       run: python -m playwright install --with-deps
       
     - name: Run your tests
-      run: pytest --tracing=retain-on-failure
+      run: pytest --tracing=retain-on-failure --ctrf report.json
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-traces
         path: test-results/
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      if: ${{ !cancelled() }}
+      with:
+        node-version: 'latest'
+
+    - name: Install Ctrf
+      if: ${{ !cancelled() }}
+      run: |
+        npm install github-actions-ctrf
+
+    - name: Generate Summary Report
+      if: ${{ !cancelled() }}
+      run: |
+        npx github-actions-ctrf report.json
